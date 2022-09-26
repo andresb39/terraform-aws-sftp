@@ -51,5 +51,3 @@ module "sftp"{
     stage = "prod"
 }
 ```
-
-<!-- END_TF_DOCS -->

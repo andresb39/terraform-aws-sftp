@@ -1,4 +1,3 @@
-<!-- BEGIN_TF_DOCS -->
 # SFTP example 
 With this example we are going to create a SFTP server with Identity Provider + S3 bucket + Credentials in AWS Secret Manage
 
@@ -40,5 +39,3 @@ terraform apply
 ```
 terraforom destroy
 ```
-
-<!-- END_TF_DOCS -->
