@@ -49,5 +49,12 @@ module "sftp"{
     zone_name = "example.com"
     # optional 
     stage = "prod"
+    tags = {
+      owner       = "DevOps"
+      managered   = "terraform"
+  }
 }
 ```
+
+# Examples
+- [Complete](https://github.com/andresb39/terraform-aws-sftp/tree/main/examples/complete): With this example we are going to create a SFTP server with Identity Provider + S3 bucket + Credentials in AWS Secret Manage
