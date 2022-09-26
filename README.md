@@ -17,9 +17,9 @@ https://aws.amazon.com/blogs/storage/enable-password-authentication-for-aws-tran
 #### _The following resources will be created._
 
 - [X] IAM Roles for:
-  - SFTP
-  - Api Gateway
-  - Lambda
+    - SFTP
+    - Api Gateway
+    - Lambda
 - [X] Transfer Family Server
 - [X] Api Gateway
 - [X] Lambda
