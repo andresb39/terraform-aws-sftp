@@ -13,9 +13,7 @@ repos:
         args:
           - --args=-diff
           - --args=-write=false
-#      - id: terraform_validate
-#        args:
-#          - --args=-json
+      - id: terraform_validate
       - id: terraform_docs
         args:
           - --hook-config=--path-to-file=./TFDOC.md        # Valid UNIX path. I.e. ../TFDOC.md or docs/README.md etc.

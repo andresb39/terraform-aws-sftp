@@ -1,6 +1,6 @@
 output "dns" {
   description = "SFTP DNS"
-  value       = module.sftp.sft_dns
+  value       = module.sftp.sftp_dns
 }
 
 output "endpoint" {

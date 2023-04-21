@@ -8,9 +8,7 @@ env:
   TERRAFORM_VERSION: "1.0.11"
 
 permissions:
-  contents:      read
-  id-token:      write
-  issues:        write
+  contents: read
   pull-requests: write
 
 jobs:
@@ -59,4 +57,4 @@ jobs:
       - name: tfsec
         uses: aquasecurity/tfsec-pr-commenter-action@v1.3.1
         with:
-          github_token: ${{ env.GITHUB_TOKEN }}
+          github_token: ${{ github.token }}
