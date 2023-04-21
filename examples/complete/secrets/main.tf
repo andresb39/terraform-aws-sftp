@@ -1,7 +1,8 @@
+# tfsec:ignore:aws-ssm-secret-use-customer-key
 resource "aws_secretsmanager_secret" "secretmanager" {
-    name = var.name
-    description = var.description
-    tags = var.tags
+  name        = var.name
+  description = var.description
+  tags        = var.tags
 }
 
 resource "aws_secretsmanager_secret_version" "secretmanager" {

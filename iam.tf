@@ -18,7 +18,7 @@ resource "aws_iam_role" "apigateway_idp_role" {
   EOF
 }
 
-resource "aws_iam_role_policy_attachment" "apigateway-cloudwatchlogs" {
+resource "aws_iam_role_policy_attachment" "apigateway_cloudwatchlogs" {
   role       = aws_iam_role.apigateway_idp_role.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
 }
@@ -58,7 +58,7 @@ resource "aws_iam_role_policy" "sftp" {
           "Action": [
             "execute-api:Invoke"
           ],
-          "Resource": "arn:aws:execute-api:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:${aws_api_gateway_rest_api.apigateway-rest.id}/${aws_api_gateway_stage.stage.stage_name}/GET/*"
+          "Resource": "arn:aws:execute-api:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:${aws_api_gateway_rest_api.apigateway_rest.id}/${aws_api_gateway_stage.stage.stage_name}/GET/*"
         },
         {
           "Sid": "ReadApi",
@@ -97,7 +97,7 @@ resource "aws_iam_role_policy" "sftp_log" {
   # policy to allow logging to Cloudwatch
   name = "sftp-server-iam-log-policy-${random_string.random_suffix.result}-${var.stage}"
   role = aws_iam_role.sftp_log.id
-
+	# tfsec:ignore:aws-iam-no-policy-wildcards
   policy = <<-POLICY
     {
       "Version": "2012-10-17",

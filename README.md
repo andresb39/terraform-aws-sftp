@@ -23,16 +23,27 @@ https://aws.amazon.com/blogs/storage/enable-password-authentication-for-aws-tran
 - [X] Transfer Family Server
 - [X] Api Gateway
 - [X] Lambda
+
+#### _Route53 resources are optional, they will be created if the zone_name variable is provided._
 - [X] Route53
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| <a name="provider_archive"></a> [archive](#provider\_archive) | >= 2.2.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.50.0 |
+| <a name="provider_random"></a> [random](#provider\_random) | >= 3.1.0 |
+
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_sftp_name"></a> [sftp\_name](#input\_sftp\_name) | SFTP DNS Name | `string` | `"sftp"` |   yes    |
-| <a name="input_stage"></a> [stage](#input\_stage) | The deployment stage | `string` | `"dev"` |   yes    |
-| <a name="input_zone_name"></a> [zone\_name](#input\_zone\_name) | Zona Name | `string` | `""` |   yes    |
-| <a name="input_tags"></a> [tags](#input\_tags) | Tags for resources | `map(string)` | `{}` |    no    |
+| <a name="input_sftp_name"></a> [sftp\_name](#input\_sftp\_name) | SFTP DNS Name | `string` | `"sftp"` | no |
+| <a name="input_stage"></a> [stage](#input\_stage) | The deployment stage | `string` | `"dev"` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | Tags for resources | `map(string)` | `{}` | no |
+| <a name="input_zone_name"></a> [zone\_name](#input\_zone\_name) | Zona Name | `string` | `""` | no |
 
 
 ## Outputs
@@ -40,19 +51,20 @@ https://aws.amazon.com/blogs/storage/enable-password-authentication-for-aws-tran
 | Name | Description |
 |------|-------------|
 | <a name="output_endpoint"></a> [endpoint](#output\_endpoint) | SFTP EndPoint url |
-| <a name="output_sft_dns"></a> [sft\_dns](#output\_sft\_dns) | SFTP DNS |
+| <a name="output_sftp_dns"></a> [sftp\_dns](#output\_sftp\_dns) | SFTP DNS |
 
 ### Usage
-```
+```terraform
 module "sftp"{
-    source = "https://github.com/andresb39/terraform-aws-sftp.git?ref=v0.0.1"
-    zone_name = "example.com"
-    # optional 
-    stage = "prod"
-    tags = {
-      owner       = "DevOps"
-      managered   = "terraform"
-  }
+  source  = "andresb39/sftp/aws"
+  version = "0.0.2"
+  # optional
+  zone_name = "example.com"
+  stage = "prod"
+  tags = {
+    owner       = "DevOps"
+    managered   = "terraform"
+}
 }
 ```
 

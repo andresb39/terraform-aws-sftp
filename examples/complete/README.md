@@ -1,4 +1,4 @@
-# SFTP example 
+# SFTP example
 With this example we are going to create a SFTP server with Identity Provider + S3 bucket + Credentials in AWS Secret Manage
 
 ## TO DO
@@ -17,7 +17,7 @@ With this example we are going to create a SFTP server with Identity Provider + 
 
 ## Usage
 ```
-terraform init 
+terraform init
 terraform plan
 terraform apply
 ```

@@ -5,7 +5,7 @@ resource "aws_transfer_server" "sftp" {
   invocation_role        = aws_iam_role.sftp.arn
   endpoint_type          = "PUBLIC"
 
-  tags = "${merge(var.tags, tomap({
-    "Name"= "SFTP"})
-  )}"
+  tags = (merge(var.tags, tomap({
+    "Name" = "SFTP" })
+  ))
 }

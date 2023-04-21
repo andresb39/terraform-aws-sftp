@@ -1,5 +1,6 @@
 variable "name" {
   description = "Name for resources"
+  type        = string
 }
 
 variable "secrets_maps" {
@@ -9,6 +10,7 @@ variable "secrets_maps" {
 
 variable "description" {
   description = "Description for resources"
+  type        = string
 }
 
 variable "tags" {

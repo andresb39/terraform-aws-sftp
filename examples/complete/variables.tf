@@ -1,4 +1,5 @@
 variable "user_name" {
   description = "Username to access"
-  default = "sftpadmin"
+  default     = "sftpadmin"
+  type        = string
 }
