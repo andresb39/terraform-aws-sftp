@@ -68,7 +68,7 @@ def lambda_handler(event, context):
                 + authentication_type
             )
             return build_response(secret_dict,
-                                  authentication_type, input_protocol)
+                                    authentication_type, input_protocol)
         else:
             print("User failed authentication return empty response")
             return {}
@@ -90,7 +90,7 @@ def lookup(secret_dict, key, input_protocol):
 
 def check_ipaddress(secret_dict, input_sourceIp, input_protocol):
     accepted_ip_network = lookup(secret_dict,
-                                 "AcceptedIpNetwork", input_protocol)
+                                    "AcceptedIpNetwork", input_protocol)
     if not accepted_ip_network:
         # No IP provided so skip checks
         print("No IP range provided - Skip IP check")

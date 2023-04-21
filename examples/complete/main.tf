@@ -1,9 +1,8 @@
-module sftp {
-  source = "../.."
-  zone_name = "example.com"
-  stage = "prod"
+module "sftp" {
+  source    = "../.."
+  stage     = "prod"
   tags = {
-    owner       = "DevOps"
-    managered   = "terraform"
+    owner     = "DevOps"
+    managered = "terraform"
   }
 }
