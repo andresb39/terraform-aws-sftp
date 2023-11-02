@@ -25,15 +25,15 @@
 * ## Usage
 * ```hcl
 * module "sftp" {
-* 	source = "andresb39/sftp/aws"
-* 	version = "0.0.3"
-* 	zone_name = "example.com" # Optional
-* 	stage = "dev"
-* 	tags = {
-* 		Environment = "dev"
-* 		Project     = "sftp"
-* 		Team        = "devops"
-* 	}
+*  source = "andresb39/sftp/aws"
+*  version = "0.0.3"
+*  zone_name = "example.com" # Optional
+*  stage = "dev"
+*  tags = {
+*   Environment = "dev"
+* 	Project     = "sftp"
+* 	Team        = "devops"
+*  }
 * }
 * ```
 *

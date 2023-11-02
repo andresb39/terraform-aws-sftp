@@ -16,6 +16,10 @@ repos:
           - --hook-config=--add-to-exiting-file=true # Boolean. true or false
           - --hook-config=--create-file-if-not-exist=true # Boolean. true or false
       - id: terraform_validate
+        args:
+          - --args=-json
+          - --args=-no-color
+          - --hook-config=--retry-once-with-cleanup=true
       - id: terraform_tflint
         args:
           - "--args=--module"
