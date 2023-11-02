@@ -1,4 +1,6 @@
-<!-- BEGIN_TF_DOCS -->
+# terraform-aws-sftp
+
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 This module aims to create a SFTP Server on AWS with an identity provider (IdP) based on users and passwords.
 - The SFTP Server is created using the AWS Transfer Family service.
 - The IdP is created using lambda functions and API Gateway.
@@ -106,4 +108,4 @@ No modules.
 |------|-------------|
 | <a name="output_endpoint"></a> [endpoint](#output\_endpoint) | SFTP EndPoint url |
 | <a name="output_sftp_dns"></a> [sftp\_dns](#output\_sftp\_dns) | SFTP DNS |
-<!-- END_TF_DOCS -->
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
