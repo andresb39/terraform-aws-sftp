@@ -1,4 +1,4 @@
 output "secret" {
-	value = aws_secretsmanager_secret.secretmanager.arn
-	description = "Secret ARN"
+  value       = aws_secretsmanager_secret.secretmanager.arn
+  description = "Secret ARN"
 }

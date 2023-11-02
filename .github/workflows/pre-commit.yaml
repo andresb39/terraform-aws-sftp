@@ -1,60 +1,31 @@
-name: Run Pre-Commit
+name: Pre-Commit Checks
 
 on:
   pull_request:
-    branches: [main]
-
-env:
-  TERRAFORM_VERSION: "1.0.11"
-
-permissions:
-  contents: read
-  pull-requests: write
 
 jobs:
   pre-commit:
+    name: Checks
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install tfenv
+        uses: rhythmictech/actions-setup-tfenv@v0.0.4
 
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: ${{ env.TERRAFORM_VERSION }}
-          terraform_wrapper: false
+          python-version: "3.10"
 
       - name: Install prerequisites
-        run: |
-          pip3 install --no-cache-dir pre-commit
-          pip3 install --no-cache-dir checkov
-          curl -L "$(curl -s https://api.github.com/repos/terraform-docs/terraform-docs/releases/latest | grep -o -E -m 1 "https://.+?-linux-amd64.tar.gz")" > terraform-docs.tgz && tar -xzf terraform-docs.tgz terraform-docs && rm terraform-docs.tgz && chmod +x terraform-docs && sudo mv terraform-docs /usr/bin/
-          curl -L "$(curl -s https://api.github.com/repos/tenable/terrascan/releases/latest | grep -o -E -m 1 "https://.+?_Linux_x86_64.tar.gz")" > terrascan.tar.gz && tar -xzf terrascan.tar.gz terrascan && rm terrascan.tar.gz && sudo mv terrascan /usr/bin/ && terrascan init
-          curl -L "$(curl -s https://api.github.com/repos/terraform-linters/tflint/releases/latest | grep -o -E -m 1 "https://.+?_linux_amd64.zip")" > tflint.zip && unzip tflint.zip && rm tflint.zip && sudo mv tflint /usr/bin/
-          curl -L "$(curl -s https://api.github.com/repos/aquasecurity/tfsec/releases/latest | grep -o -E -m 1 "https://.+?tfsec-linux-amd64")" > tfsec && chmod +x tfsec && sudo mv tfsec /usr/bin/
-          sudo apt install -y jq && \
-          curl -L "$(curl -s https://api.github.com/repos/minamijoyo/tfupdate/releases/latest | grep -o -E -m 1 "https://.+?_linux_amd64.tar.gz")" > tfupdate.tar.gz && tar -xzf tfupdate.tar.gz tfupdate && rm tfupdate.tar.gz && sudo mv tfupdate /usr/bin/
-          curl -L "$(curl -s https://api.github.com/repos/minamijoyo/hcledit/releases/latest | grep -o -E -m 1 "https://.+?_linux_amd64.tar.gz")" > hcledit.tar.gz && tar -xzf hcledit.tar.gz hcledit && rm hcledit.tar.gz && sudo mv hcledit /usr/bin/
+        run: cat .github/script/pre-commit.sh | bash
+
+      - name: Install Terraform version
+        run: tfenv install
 
       - name: Run pre-commit
         uses: pre-commit/action@v3.0.0
         with:
           extra_args: --all-files
-
-  tfsec:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      - name: tfsec
-        uses: aquasecurity/tfsec-pr-commenter-action@v1.3.1
-        with:
-          github_token: ${{ github.token }}

@@ -1,5 +1,5 @@
 resource "aws_iam_role" "apigateway_idp_role" {
-  name = "apigateway_idp_role-${random_string.random_suffix.result}-${var.stage}"
+  name = local.apigateway_idp_role_name
 
   assume_role_policy = <<-EOF
     {
@@ -25,7 +25,7 @@ resource "aws_iam_role_policy_attachment" "apigateway_cloudwatchlogs" {
 
 # roles for SFTP server
 resource "aws_iam_role" "sftp" {
-  name = "sftp-server-iam-role-${random_string.random_suffix.result}-${var.stage}"
+  name = local.sftp_role_name
 
   assume_role_policy = <<-POLICY
     {
@@ -45,7 +45,7 @@ resource "aws_iam_role" "sftp" {
 
 resource "aws_iam_role_policy" "sftp" {
   # policy to allow invocation of IdP API
-  name = "sftp-server-iam-policy-${random_string.random_suffix.result}-${var.stage}"
+  name = local.sftp_iam_policy_name
   role = aws_iam_role.sftp.id
 
   policy = <<-POLICY
@@ -75,7 +75,7 @@ resource "aws_iam_role_policy" "sftp" {
 
 resource "aws_iam_role" "sftp_log" {
   # log role for SFTP server
-  name = "sftp-server-iam-log-role-${random_string.random_suffix.result}-${var.stage}"
+  name = local.sftp_log_role_name
 
   assume_role_policy = <<-POLICY
     {
@@ -95,9 +95,9 @@ resource "aws_iam_role" "sftp_log" {
 
 resource "aws_iam_role_policy" "sftp_log" {
   # policy to allow logging to Cloudwatch
-  name = "sftp-server-iam-log-policy-${random_string.random_suffix.result}-${var.stage}"
+  name = local.sftp_log_iam_policy_name
   role = aws_iam_role.sftp_log.id
-	# tfsec:ignore:aws-iam-no-policy-wildcards
+  # tfsec:ignore:aws-iam-no-policy-wildcards
   policy = <<-POLICY
     {
       "Version": "2012-10-17",
@@ -116,7 +116,7 @@ resource "aws_iam_role_policy" "sftp_log" {
 
 # Roles for Lambdas
 resource "aws_iam_role" "lambda_idp_role" {
-  name = "${random_string.random_suffix.result}-${var.stage}"
+  name = local.lambda_idp_role_name
 
   assume_role_policy = <<-EOF
     {
@@ -141,7 +141,7 @@ resource "aws_iam_role_policy_attachment" "lambda_logs_idp" {
 }
 
 resource "aws_iam_policy" "lambda_idp_policy" {
-  name        = "${random_string.random_suffix.result}-${var.stage}"
+  name        = local.lambda_idp_iam_policy_name
   path        = "/"
   description = "IAM policy IdP service for SFTP in Lambda"
 
