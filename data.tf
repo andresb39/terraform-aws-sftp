@@ -9,6 +9,6 @@ data "aws_route53_zone" "this" {
 
 data "archive_file" "sftp_idp" {
   type        = "zip"
-  source_dir  = "${path.module}/source/lambda"
+  source_dir  = join("/", [path.module, "source", "lambda"])
   output_path = local.filename
 }

@@ -55,9 +55,9 @@ module "sftp" {
 
 | Name | Version |
 |------|---------|
-| <a name="provider_archive"></a> [archive](#provider\_archive) | 2.4.0 |
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.0.1 |
-| <a name="provider_random"></a> [random](#provider\_random) | 3.5.1 |
+| <a name="provider_archive"></a> [archive](#provider\_archive) | ~> 2.4.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | ~>5.0.0 |
+| <a name="provider_random"></a> [random](#provider\_random) | ~> 3.5.1 |
 
 ## Modules
 
