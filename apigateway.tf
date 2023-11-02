@@ -3,7 +3,7 @@ resource "aws_api_gateway_account" "api_gateway_account" {
 }
 
 resource "aws_api_gateway_rest_api" "apigateway_rest" {
-  name        = "apigateway-rest-${random_string.random_suffix.result}-${var.stage}"
+  name        = local.apigateway_rest_name
   description = "This API provides an IDP for AWS Transfer service"
   endpoint_configuration {
     types = ["REGIONAL"]
@@ -33,9 +33,9 @@ resource "aws_api_gateway_deployment" "deployment" {
 }
 
 # tfsec:ignore:aws-api-gateway-enable-access-logging
-# tfsec:ignore:aws-api-gateway-enable-tracing
 resource "aws_api_gateway_stage" "stage" {
-  stage_name    = var.stage
-  rest_api_id   = aws_api_gateway_rest_api.apigateway_rest.id
-  deployment_id = aws_api_gateway_deployment.deployment.id
+  stage_name           = var.stage
+  rest_api_id          = aws_api_gateway_rest_api.apigateway_rest.id
+  deployment_id        = aws_api_gateway_deployment.deployment.id
+  xray_tracing_enabled = true
 }

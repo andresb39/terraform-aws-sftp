@@ -1,6 +1,6 @@
 resource "aws_lambda_function" "lambda_idp" {
-  filename         = "${path.module}/sftp-idp.zip"
-  function_name    = "lambda-idp-${random_string.random_suffix.result}-${var.stage}"
+  filename         = local.filename
+  function_name    = local.function_name
   role             = aws_iam_role.lambda_idp_role.arn
   handler          = "index.lambda_handler"
   source_code_hash = data.archive_file.sftp_idp.output_base64sha256
@@ -8,10 +8,10 @@ resource "aws_lambda_function" "lambda_idp" {
 
   environment {
     variables = {
-			"SecretsManagerRegion" = local.auth_source_value
+      "SecretsManagerRegion" = local.auth_source_value
     }
   }
-	tracing_config {
-		mode = "Active"
-	}
+  tracing_config {
+    mode = "Active"
+  }
 }
