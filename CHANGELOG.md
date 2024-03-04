@@ -17,3 +17,8 @@ Deploy Transfer Family with Identity Provider
 - [x] Update terraform version
 - [x] Edit Readme
 - [x] Update locals
+
+## Version **v0.0.4**
+
+- [x] Incorporate a log group into the SFTP / ApiGateway.
+- [x] Resolved the problem of Lambda's access to KMS for decrypting SecretManager.

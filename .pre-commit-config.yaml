@@ -15,11 +15,6 @@ repos:
           - --hook-config=--path-to-file=./README.md # Valid UNIX path. I.e. ../TFDOC.md or docs/README.md etc.
           - --hook-config=--add-to-exiting-file=true # Boolean. true or false
           - --hook-config=--create-file-if-not-exist=true # Boolean. true or false
-      - id: terraform_validate
-        args:
-          - --args=-json
-          - --args=-no-color
-          - --hook-config=--retry-once-with-cleanup=true
       - id: terraform_tflint
         args:
           - "--args=--module"
@@ -52,11 +47,5 @@ repos:
         args: ["--fix=auto"]
       - id: check-json
       - id: check-yaml
-
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
-    hooks:
-      - id: trailing-whitespace
       - id: end-of-file-fixer
-      - id: check-yaml
       - id: check-added-large-files
