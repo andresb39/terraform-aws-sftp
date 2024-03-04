@@ -24,9 +24,9 @@
 * ```
 */
 module "sftp" {
-  source    = "../.."
-  stage     = "prod"
-  zone_name = "example.com"
+  source = "../.."
+  stage  = "prod"
+  #zone_name = "example.com"
   tags = {
     owner     = "DevOps"
     managered = "terraform"
