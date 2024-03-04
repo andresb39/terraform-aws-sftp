@@ -3,7 +3,7 @@
 * - The SFTP Server is created using the AWS Transfer Family service.
 * - The IdP is created using lambda functions and API Gateway.
 *
-* This module will show the **DNS** and **EndPoint** that will allow us to connect to **_SFTP_**.
+* This module will show the **DNS** and **EndPoint** that will allow us to connect to **SFTP**.
 *
 * ## Credentials stored
 * The credentials can be stord as AWS Secrets Manager.
@@ -19,6 +19,7 @@
 * - [X] Lambda functions
 * - [X] API Gateway
 * - [X] SFTP Server
+* - [X] CloudWatch Log Group
 *
 * ### Route53 DNS record is optional and can be created if the variable `zone_name` is set.
 *

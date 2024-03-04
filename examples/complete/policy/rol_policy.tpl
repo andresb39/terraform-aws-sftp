@@ -3,6 +3,7 @@
     "Statement": [
         {
             "Sid": "ReadWriteS3",
+            "Principal": {},
             "Action": [
                 "s3:ListBucket"
             ],
@@ -11,8 +12,9 @@
                 "${bucket-arn}"
             ]
         },
-        {
+				{
             "Effect": "Allow",
+            "Principal": {},
             "Action": [
                 "s3:PutObject",
                 "s3:GetObject",

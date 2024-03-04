@@ -1,170 +1,83 @@
-resource "aws_iam_role" "apigateway_idp_role" {
-  name = local.apigateway_idp_role_name
-
-  assume_role_policy = <<-EOF
-    {
-      "Version": "2012-10-17",
-      "Statement": [
-        {
-          "Action": "sts:AssumeRole",
-          "Principal": {
-            "Service": "apigateway.amazonaws.com"
-          },
-          "Effect": "Allow",
-          "Sid": ""
-        }
-      ]
-    }
-  EOF
+locals {
+  common_actions = [
+    "kms:Encrypt",
+    "kms:Decrypt",
+    "kms:ReEncrypt*",
+    "kms:GenerateDataKey*",
+    "kms:DescribeKey"
+  ]
 }
 
+data "aws_iam_policy_document" "assume_role_common" {
+  statement {
+    actions = ["sts:AssumeRole"]
+    effect  = "Allow"
+    principals {
+      type        = "Service"
+      identifiers = ["apigateway.amazonaws.com", "transfer.amazonaws.com", "lambda.amazonaws.com"]
+    }
+  }
+}
+
+resource "aws_iam_role" "apigateway_idp_role" {
+  name               = local.apigateway_idp_role_name
+  assume_role_policy = data.aws_iam_policy_document.assume_role_common.json
+}
+
+resource "aws_iam_role" "sftp" {
+  name               = local.sftp_role_name
+  assume_role_policy = data.aws_iam_policy_document.assume_role_common.json
+}
+
+resource "aws_iam_role" "sftp_log" {
+  name                = local.sftp_log_role_name
+  assume_role_policy  = data.aws_iam_policy_document.assume_role_common.json
+  managed_policy_arns = ["arn:aws:iam::aws:policy/service-role/AWSTransferLoggingAccess"]
+}
+
+resource "aws_iam_role" "lambda_idp_role" {
+  name               = local.lambda_idp_role_name
+  assume_role_policy = data.aws_iam_policy_document.assume_role_common.json
+}
+
+# Attach AWS managed policy to API Gateway role
 resource "aws_iam_role_policy_attachment" "apigateway_cloudwatchlogs" {
   role       = aws_iam_role.apigateway_idp_role.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
 }
 
-# roles for SFTP server
-resource "aws_iam_role" "sftp" {
-  name = local.sftp_role_name
-
-  assume_role_policy = <<-POLICY
-    {
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-            "Effect": "Allow",
-            "Principal": {
-                "Service": "transfer.amazonaws.com"
-            },
-            "Action": "sts:AssumeRole"
-            }
-        ]
-    }
-  POLICY
-}
-
-resource "aws_iam_role_policy" "sftp" {
-  # policy to allow invocation of IdP API
-  name = local.sftp_iam_policy_name
-  role = aws_iam_role.sftp.id
-
-  policy = <<-POLICY
-    {
-      "Version": "2012-10-17",
-      "Statement": [
-        {
-          "Sid": "InvokeApi",
-          "Effect": "Allow",
-          "Action": [
-            "execute-api:Invoke"
-          ],
-          "Resource": "arn:aws:execute-api:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:${aws_api_gateway_rest_api.apigateway_rest.id}/${aws_api_gateway_stage.stage.stage_name}/GET/*"
-        },
-        {
-          "Sid": "ReadApi",
-          "Effect": "Allow",
-          "Action": [
-            "apigateway:GET"
-          ],
-          "Resource": "*"
-        }
-      ]
-    }
-  POLICY
-}
-
-resource "aws_iam_role" "sftp_log" {
-  # log role for SFTP server
-  name = local.sftp_log_role_name
-
-  assume_role_policy = <<-POLICY
-    {
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-            "Effect": "Allow",
-            "Principal": {
-                "Service": "transfer.amazonaws.com"
-            },
-            "Action": "sts:AssumeRole"
-            }
-        ]
-    }
-  POLICY
-}
-
-resource "aws_iam_role_policy" "sftp_log" {
-  # policy to allow logging to Cloudwatch
-  name = local.sftp_log_iam_policy_name
-  role = aws_iam_role.sftp_log.id
-  # tfsec:ignore:aws-iam-no-policy-wildcards
-  policy = <<-POLICY
-    {
-      "Version": "2012-10-17",
-      "Statement": [{
-          "Sid": "AllowFullAccesstoCloudWatchLogs",
-          "Effect": "Allow",
-          "Action": [
-            "logs:*"
-          ],
-          "Resource": "*"
-        }
-      ]
-    }
-  POLICY
-}
-
-# Roles for Lambdas
-resource "aws_iam_role" "lambda_idp_role" {
-  name = local.lambda_idp_role_name
-
-  assume_role_policy = <<-EOF
-    {
-      "Version": "2012-10-17",
-      "Statement": [
-        {
-          "Action": "sts:AssumeRole",
-          "Principal": {
-            "Service": "lambda.amazonaws.com"
-          },
-          "Effect": "Allow",
-          "Sid": ""
-        }
-      ]
-    }
-  EOF
-}
-
-resource "aws_iam_role_policy_attachment" "lambda_logs_idp" {
-  role       = aws_iam_role.lambda_idp_role.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
-}
-
+# Custom IAM policy for Lambda
 resource "aws_iam_policy" "lambda_idp_policy" {
   name        = local.lambda_idp_iam_policy_name
   path        = "/"
-  description = "IAM policy IdP service for SFTP in Lambda"
-
-  policy = <<-EOF
-    {
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Effect": "Allow",
-                "Action": "secretsmanager:GetSecretValue",
-                "Resource": "arn:aws:secretsmanager:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:secret:SFTP/*"
-            }
-        ]
-    }
-  EOF
+  description = "IAM policy for Lambda"
+  policy      = data.aws_iam_policy_document.lambda_idp_policy.json
 }
 
-resource "aws_iam_role_policy_attachment" "lambda_idp_att" {
+# IAM policy document for Lambda
+#tfsec:ignore:AWS:aws-iam-no-policy-wildcards
+data "aws_iam_policy_document" "lambda_idp_policy" {
+  statement {
+    effect    = "Allow"
+    actions   = ["secretsmanager:GetSecretValue"]
+    resources = ["arn:aws:secretsmanager:${var.aws_region}:${data.aws_caller_identity.current.account_id}:secret:SFTP/*"]
+    sid       = "SecretsManagerAccess"
+  }
+  statement {
+    effect    = "Allow"
+    actions   = local.common_actions #tfsec:ignore:aws-iam-no-policy-wildcards
+    resources = ["arn:aws:kms:${var.aws_region}:${data.aws_caller_identity.current.account_id}:key/*"]
+    sid       = "KMSAccess"
+  }
+}
+
+# Attach custom and AWS managed policies to Lambda role
+resource "aws_iam_role_policy_attachment" "lambda_idp" {
   role       = aws_iam_role.lambda_idp_role.name
   policy_arn = aws_iam_policy.lambda_idp_policy.arn
 }
 
-resource "aws_iam_role_policy_attachment" "lambda_idp_att_exc" {
+resource "aws_iam_role_policy_attachment" "lambda_basic_execution" {
   role       = aws_iam_role.lambda_idp_role.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }

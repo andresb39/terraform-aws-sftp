@@ -11,7 +11,15 @@ resource "aws_s3_bucket" "bucket" {
   bucket_prefix = "sftp-example"
 }
 
-resource "aws_s3_bucket_acl" "bucket_acl" {
+resource "aws_s3_bucket_ownership_controls" "controls" {
   bucket = aws_s3_bucket.bucket.id
-  acl    = "private"
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
+}
+
+resource "aws_s3_bucket_acl" "bucket_acl" {
+  bucket     = aws_s3_bucket.bucket.id
+  acl        = "private"
+  depends_on = [aws_s3_bucket_ownership_controls.controls]
 }

@@ -4,12 +4,10 @@ locals {
   filename                   = join("/", [path.module, "sftp-idp.zip"])
   apigateway_idp_role_name   = join("-", ["apigateway-idp-role", local.suffix])
   sftp_role_name             = join("-", ["sftp-server-iam-role", local.suffix])
-  sftp_iam_policy_name       = join("-", ["sftp-server-iam-policy", local.suffix])
   sftp_log_role_name         = join("-", ["sftp-server-iam-log-role", local.suffix])
-  sftp_log_iam_policy_name   = join("-", ["sftp-server-iam-log-policy", local.suffix])
   lambda_idp_role_name       = join("-", ["lambda-idp-role", local.suffix])
   lambda_idp_iam_policy_name = join("-", ["lambda-idp-iam-policy", local.suffix])
   apigateway_rest_name       = join("-", ["apigateway-idp", local.suffix])
   auth_source_value          = data.aws_region.current.name
-
+  sftp_log_group             = join("/", ["/aws", "transfer", local.suffix])
 }

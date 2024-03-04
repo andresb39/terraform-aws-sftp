@@ -32,10 +32,27 @@ resource "aws_api_gateway_deployment" "deployment" {
   }
 }
 
-# tfsec:ignore:aws-api-gateway-enable-access-logging
 resource "aws_api_gateway_stage" "stage" {
   stage_name           = var.stage
   rest_api_id          = aws_api_gateway_rest_api.apigateway_rest.id
   deployment_id        = aws_api_gateway_deployment.deployment.id
   xray_tracing_enabled = true
+
+  access_log_settings {
+    destination_arn = "arn:aws:logs:region:${data.aws_caller_identity.current.account_id}:log-group:access_logging"
+    format          = "json"
+  }
+}
+
+resource "aws_api_gateway_method_settings" "all" {
+  rest_api_id = aws_api_gateway_rest_api.apigateway_rest.id
+  stage_name  = aws_api_gateway_stage.stage.stage_name
+  method_path = "*/*"
+
+  settings {
+    metrics_enabled      = true
+    logging_level        = "ERROR"
+    caching_enabled      = true
+    cache_data_encrypted = true
+  }
 }
