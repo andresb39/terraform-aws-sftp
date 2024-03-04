@@ -8,14 +8,14 @@ Create AWS Secrets Manager to store the credentials
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.6.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.38 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 1.6.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 5.38 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.38 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.38 |
 
 ## Modules
 
@@ -25,9 +25,9 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [aws_kms_key.kms](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key) | resource |
-| [aws_secretsmanager_secret.secretmanager](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret) | resource |
-| [aws_secretsmanager_secret_version.secretmanager](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret_version) | resource |
+| [aws_kms_key.kms](https://registry.terraform.io/providers/hashicorp/aws/5.38/docs/resources/kms_key) | resource |
+| [aws_secretsmanager_secret.secretmanager](https://registry.terraform.io/providers/hashicorp/aws/5.38/docs/resources/secretsmanager_secret) | resource |
+| [aws_secretsmanager_secret_version.secretmanager](https://registry.terraform.io/providers/hashicorp/aws/5.38/docs/resources/secretsmanager_secret_version) | resource |
 
 ## Inputs
 

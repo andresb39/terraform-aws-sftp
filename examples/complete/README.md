@@ -29,16 +29,16 @@ terraform destroy
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.6.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.38 |
-| <a name="requirement_random"></a> [random](#requirement\_random) | >= 3.5.1 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 1.6.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 5.38 |
+| <a name="requirement_random"></a> [random](#requirement\_random) | 3.5.1 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.38 |
-| <a name="provider_random"></a> [random](#provider\_random) | >= 3.5.1 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.38 |
+| <a name="provider_random"></a> [random](#provider\_random) | 3.5.1 |
 
 ## Modules
 
@@ -51,12 +51,12 @@ terraform destroy
 
 | Name | Type |
 |------|------|
-| [aws_iam_role.role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
-| [aws_iam_role_policy.policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy) | resource |
-| [aws_s3_bucket.bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | resource |
-| [aws_s3_bucket_acl.bucket_acl](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_acl) | resource |
-| [aws_s3_bucket_ownership_controls.controls](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_ownership_controls) | resource |
-| [random_password.password](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
+| [aws_iam_role.role](https://registry.terraform.io/providers/hashicorp/aws/5.38/docs/resources/iam_role) | resource |
+| [aws_iam_role_policy.policy](https://registry.terraform.io/providers/hashicorp/aws/5.38/docs/resources/iam_role_policy) | resource |
+| [aws_s3_bucket.bucket](https://registry.terraform.io/providers/hashicorp/aws/5.38/docs/resources/s3_bucket) | resource |
+| [aws_s3_bucket_acl.bucket_acl](https://registry.terraform.io/providers/hashicorp/aws/5.38/docs/resources/s3_bucket_acl) | resource |
+| [aws_s3_bucket_ownership_controls.controls](https://registry.terraform.io/providers/hashicorp/aws/5.38/docs/resources/s3_bucket_ownership_controls) | resource |
+| [random_password.password](https://registry.terraform.io/providers/hashicorp/random/3.5.1/docs/resources/password) | resource |
 
 ## Inputs
 
