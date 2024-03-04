@@ -48,18 +48,18 @@ module "sftp" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 1.6.0 |
-| <a name="requirement_archive"></a> [archive](#requirement\_archive) | 2.4.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 5.38 |
-| <a name="requirement_random"></a> [random](#requirement\_random) | 3.5.1 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.6.0 |
+| <a name="requirement_archive"></a> [archive](#requirement\_archive) | >= 2.4.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.38 |
+| <a name="requirement_random"></a> [random](#requirement\_random) | >= 3.5.1 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_archive"></a> [archive](#provider\_archive) | 2.4.0 |
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.38 |
-| <a name="provider_random"></a> [random](#provider\_random) | 3.5.1 |
+| <a name="provider_archive"></a> [archive](#provider\_archive) | >= 2.4.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.38 |
+| <a name="provider_random"></a> [random](#provider\_random) | >= 3.5.1 |
 
 ## Modules
 
@@ -69,33 +69,33 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [aws_api_gateway_account.api_gateway_account](https://registry.terraform.io/providers/hashicorp/aws/5.38/docs/resources/api_gateway_account) | resource |
-| [aws_api_gateway_deployment.deployment](https://registry.terraform.io/providers/hashicorp/aws/5.38/docs/resources/api_gateway_deployment) | resource |
-| [aws_api_gateway_method_settings.all](https://registry.terraform.io/providers/hashicorp/aws/5.38/docs/resources/api_gateway_method_settings) | resource |
-| [aws_api_gateway_rest_api.apigateway_rest](https://registry.terraform.io/providers/hashicorp/aws/5.38/docs/resources/api_gateway_rest_api) | resource |
-| [aws_api_gateway_stage.stage](https://registry.terraform.io/providers/hashicorp/aws/5.38/docs/resources/api_gateway_stage) | resource |
-| [aws_cloudwatch_log_group.transfer](https://registry.terraform.io/providers/hashicorp/aws/5.38/docs/resources/cloudwatch_log_group) | resource |
-| [aws_iam_policy.lambda_idp_policy](https://registry.terraform.io/providers/hashicorp/aws/5.38/docs/resources/iam_policy) | resource |
-| [aws_iam_role.apigateway_idp_role](https://registry.terraform.io/providers/hashicorp/aws/5.38/docs/resources/iam_role) | resource |
-| [aws_iam_role.lambda_idp_role](https://registry.terraform.io/providers/hashicorp/aws/5.38/docs/resources/iam_role) | resource |
-| [aws_iam_role.sftp](https://registry.terraform.io/providers/hashicorp/aws/5.38/docs/resources/iam_role) | resource |
-| [aws_iam_role.sftp_log](https://registry.terraform.io/providers/hashicorp/aws/5.38/docs/resources/iam_role) | resource |
-| [aws_iam_role_policy_attachment.apigateway_cloudwatchlogs](https://registry.terraform.io/providers/hashicorp/aws/5.38/docs/resources/iam_role_policy_attachment) | resource |
-| [aws_iam_role_policy_attachment.lambda_basic_execution](https://registry.terraform.io/providers/hashicorp/aws/5.38/docs/resources/iam_role_policy_attachment) | resource |
-| [aws_iam_role_policy_attachment.lambda_idp](https://registry.terraform.io/providers/hashicorp/aws/5.38/docs/resources/iam_role_policy_attachment) | resource |
-| [aws_kms_alias.sftp_log_group](https://registry.terraform.io/providers/hashicorp/aws/5.38/docs/resources/kms_alias) | resource |
-| [aws_kms_key.sftp_log_group](https://registry.terraform.io/providers/hashicorp/aws/5.38/docs/resources/kms_key) | resource |
-| [aws_lambda_function.lambda_idp](https://registry.terraform.io/providers/hashicorp/aws/5.38/docs/resources/lambda_function) | resource |
-| [aws_lambda_permission.allow_apigateway](https://registry.terraform.io/providers/hashicorp/aws/5.38/docs/resources/lambda_permission) | resource |
-| [aws_route53_record.this](https://registry.terraform.io/providers/hashicorp/aws/5.38/docs/resources/route53_record) | resource |
-| [aws_transfer_server.sftp](https://registry.terraform.io/providers/hashicorp/aws/5.38/docs/resources/transfer_server) | resource |
-| [random_string.random_suffix](https://registry.terraform.io/providers/hashicorp/random/3.5.1/docs/resources/string) | resource |
-| [archive_file.sftp_idp](https://registry.terraform.io/providers/hashicorp/archive/2.4.0/docs/data-sources/file) | data source |
-| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/5.38/docs/data-sources/caller_identity) | data source |
-| [aws_iam_policy_document.assume_role_common](https://registry.terraform.io/providers/hashicorp/aws/5.38/docs/data-sources/iam_policy_document) | data source |
-| [aws_iam_policy_document.lambda_idp_policy](https://registry.terraform.io/providers/hashicorp/aws/5.38/docs/data-sources/iam_policy_document) | data source |
-| [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/5.38/docs/data-sources/region) | data source |
-| [aws_route53_zone.this](https://registry.terraform.io/providers/hashicorp/aws/5.38/docs/data-sources/route53_zone) | data source |
+| [aws_api_gateway_account.api_gateway_account](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_account) | resource |
+| [aws_api_gateway_deployment.deployment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_deployment) | resource |
+| [aws_api_gateway_method_settings.all](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_method_settings) | resource |
+| [aws_api_gateway_rest_api.apigateway_rest](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_rest_api) | resource |
+| [aws_api_gateway_stage.stage](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_stage) | resource |
+| [aws_cloudwatch_log_group.transfer](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group) | resource |
+| [aws_iam_policy.lambda_idp_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
+| [aws_iam_role.apigateway_idp_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role.lambda_idp_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role.sftp](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role.sftp_log](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role_policy_attachment.apigateway_cloudwatchlogs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_iam_role_policy_attachment.lambda_basic_execution](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_iam_role_policy_attachment.lambda_idp](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_kms_alias.sftp_log_group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_alias) | resource |
+| [aws_kms_key.sftp_log_group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key) | resource |
+| [aws_lambda_function.lambda_idp](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function) | resource |
+| [aws_lambda_permission.allow_apigateway](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_permission) | resource |
+| [aws_route53_record.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
+| [aws_transfer_server.sftp](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/transfer_server) | resource |
+| [random_string.random_suffix](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string) | resource |
+| [archive_file.sftp_idp](https://registry.terraform.io/providers/hashicorp/archive/latest/docs/data-sources/file) | data source |
+| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
+| [aws_iam_policy_document.assume_role_common](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.lambda_idp_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) | data source |
+| [aws_route53_zone.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/route53_zone) | data source |
 
 ## Inputs
 
